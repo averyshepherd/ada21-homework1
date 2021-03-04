@@ -9,6 +9,50 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r, echo = FALSE}
+```{r, results='hide'}
 library(tidyverse)
+library(magrittr)
+```
+
+## Challenge 1
+
+```{r}
+f <- "https://raw.githubusercontent.com/difiore/ada-2021-datasets/main/darwin.txt"
+darwin <- read_delim(f, "\n", col_names = T)
+```
+
+Number of paragraphs in the chapter
+```{r}
+nrow(darwin)
+```
+
+34th paragraph
+```{r}
+darwin[[34,1]]
+```
+
+Split this vector into a new vector, split, comprising a vector of 1-word character strings
+```{r}
+split <- c()
+for (i in darwin) {
+  tmp <- stringr::str_split(i, " ")
+  for (j in tmp) {
+    split <- c(split, gsub("[[:punct:]]","", j))
+  }
+}
+```
+
+How many unique words are there in this vector?
+```{r}
+length(unique(split))
+```
+
+What is the most common word? 
+```{r}
+split %>% as.factor() %>% summary() -> extract(1)
+```
+
+How many words appear 1 time? How many words appear 5 or more times?
+```{r}
+
 ```
