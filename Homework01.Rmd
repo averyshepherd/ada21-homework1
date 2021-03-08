@@ -49,10 +49,129 @@ length(unique(split))
 
 What is the most common word? 
 ```{r}
-split %>% as.factor() %>% summary() -> extract(1)
+freqs <- split %>% as.factor() %>% summary()
+freqs[1]
 ```
 
 How many words appear 1 time? How many words appear 5 or more times?
+```{r}
+
+```
+
+Extract the entire text of the last paragraph to a new variable, final_quote
+```{r}
+final_quote <- darwin[[nrow(darwin), 1]]
+final_quote
+```
+
+Split this variable into a new vector, split_quote, again comprising a vector of 1-word character strings (i.e., each element in the vector is a different word).
+```{r}
+split_quote <- c()
+tmp <- stringr::str_split(final_quote, " ")
+for (i in tmp) {
+  split_quote <- c(split_quote, gsub("[[:punct:]]","", i))
+}
+split_quote
+```
+
+Extract every third element from this vector, assign them to a new vector, every_third, and print out the new vector. Be sure to begin with the 3rd word in the quote, i.e., “interesting.”
+```{r}
+every_third <- c()
+c <- 1
+for (i in seq(3, length(split_quote), 3)){
+  every_third[c] <- split_quote[i]
+  c <- c + 1
+}
+every_third
+```
+
+Rearrange the elements of the vector every_third into reverse alphabetical order and print it out again.
+```{r}
+every_third <- sort(every_third, decreasing = T)
+every_third
+```
+
+
+## Challenge 2
+Use the function c() to create a vector with the average high temperatures in January for Beijing, Lagos, Paris, Rio de Janeiro, San Juan, and Toronto, which are 35, 88, 42, 84, 81, and 30 degrees Fahrenheit. Call the object t.
+create a vector with the city names and call the object city.
+Use the names() function and the objects defined above to associate the temperature data with its corresponding city.
+```{r}
+t <- c(35, 88, 42, 84, 81, 30)
+city <- c("Beijing", "Lagos", "Paris", "Rio de Janeiro", "San Juan", "Toronto")
+names(t) <- city
+```
+
+Use the [ and : operators to access the temperature of the first three cities on the list.
+```{r}
+for (i in 1:3){
+  print(t[[i]])
+}
+```
+
+Use the [ operator to access the temperatures of Paris and San Juan
+```{r}
+t["Paris"]
+t["San Juan"]
+```
+
+## Challenge 3
+Create a 8 row by 20 column matrix, named m1, consisting of integers arranged in descending order from 159 to 0. Fill your matrix column-wise.
+```{r}
+m1 <- matrix(c(159:0), nrow = 8, ncol = 20)
+```
+
+Using single bracket notation, extract and print the element in row 5, column 2.
+Using single bracket notation, extract and print the contents of rows 5 to 7 of the matrix.
+```{r}
+m1[5,2]
+m1[5,]
+m1[7,]
+```
+
+Using single bracket notation, extract the contents of (row 3, column 4) to (row 6, column 9) as a new variable, m2. What is the class of this variable? What is the mode of this variable?
+```{r}
+m2 <- m1[3:6, 4:9]
+class(m2)
+mode(m2)
+```
+
+## Challenge 4
+
+Construct a 4-dimensional, 400-element array (5 x 5 x 4 x 4), named a, consisting of even integers from 2 to 800 (i.e., a descending series)
+```{r}
+a <- array(data = c(seq(2, 800, 2)), dim = c(5, 5, 4, 4))
+a[1, 1, 1, 2]
+a[2, 3, 2, ]
+a[1:5, 1:5, 3, 3]
+```
+
+## Challenge 5
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+
 ```{r}
 
 ```
