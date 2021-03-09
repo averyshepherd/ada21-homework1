@@ -12,6 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r, results='hide'}
 library(tidyverse)
 library(magrittr)
+library(purrr)
 ```
 
 ## Challenge 1
@@ -49,13 +50,26 @@ length(unique(split))
 
 What is the most common word? 
 ```{r}
-freqs <- split %>% as.factor() %>% summary()
+freqs <- split %>% as.factor %>% summary(maxsum = 90000)
 freqs[1]
 ```
 
 How many words appear 1 time? How many words appear 5 or more times?
 ```{r}
-
+counter = 0
+for (i in freqs){
+  if (i == 1) {
+    counter = counter + 1
+  }
+}
+cat("Words appearing one time: ", counter, "\n")
+counter = 0
+for (i in freqs){
+  if (i == 5) {
+    counter = counter + 1
+  }
+}
+cat("Words appearing five times: ", counter)
 ```
 
 Extract the entire text of the last paragraph to a new variable, final_quote
@@ -148,7 +162,19 @@ a[1:5, 1:5, 3, 3]
 
 ## Challenge 5
 ```{r}
+taxon <- list(c("Lorisidae", "Galagidae"),
+                    c("Cheirogaleidae", "Lepilemuridae", "Indriidae", "Lemuridae", "Daubentoniidae"),
+                    c("Tarsiidae"),
+                    c("Cebidae", "Atelidae", "Pitheciidae"),
+                    c("Hylobatidae", "Hominidae"),
+                    c("Cercopithecidae"))
 
+names(taxon) <- list("Lorisoidea", "Lemuroidea", "Tarsioidea", "Ceboidea", "Hominoidea", "Cercopithecoidea")
+
+names(taxon)[5:6] <- "Catarrhini"
+
+                    
+# infraorder <- list(list("Lorisiformes", "Lemuriformes"), c("Tarsiiformes", "Simiiformes"))
 ```
 
 
